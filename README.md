@@ -94,17 +94,28 @@ If successful, you will see:
 *Note: If you get a `channel_not_found` error, make sure you have invited your bot to the channel in Slack.*
 
 
-## Integrating with Gemini CLI
+## Global Integration (Use from any project)
 
-You can register the Slack MCP server using the `gemini mcp add` command:
+To make the Slack MCP server available to all your projects (even when working outside the `slack-mcp` directory), you should use an **absolute path** and the `--project` flag when registering it with Gemini CLI.
+
+Run this command **once** from your terminal:
 
 ```bash
-gemini mcp add slack-bridge uv run python /absolute/path/to/your/git/slack-mcp/src/slack_mcp/server.py
+gemini mcp add slack-bridge uv --project /home/count/git/slack-mcp run python /home/count/git/slack-mcp/src/slack_mcp/server.py
 ```
 
-*Note: Replace `/absolute/path/to/your/git/slack-mcp/` with the actual path to your repository.*
+### Why use absolute paths?
+- **Global Availability:** By providing the full path (`/home/count/git/...`), the Gemini CLI can locate your server and its virtual environment regardless of your current directory.
+- **Environment Isolation:** The `--project` flag tells `uv` to use the environment within your `slack-mcp` folder, ensuring all dependencies are found correctly even when you are working on a different project (like `montrose`).
 
-The server will automatically load your `.env` file when it starts, so there is no need to pass credentials as command-line arguments. After running this command, Gemini CLI will automatically load the `ask_slack` tool and make it available for use in your coding sessions.
+### Verifying Connection
+Navigate to any other project directory and run:
+
+```bash
+gemini mcp list
+```
+
+You should see `slack-bridge` listed as **🟢 Connected**.
 
 
 ## Development & Maintenance
