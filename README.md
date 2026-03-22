@@ -83,13 +83,17 @@ The agent will then trigger the `ask_slack` tool with your message.
 3. You will see the message appear in your Slack channel, allowing you to reply or act accordingly.
 
 
+## Integrating with Gemini CLI
+
+You can register the Slack MCP server using the `gemini mcp add` command:
+
 ```bash
-gemini mcp add slack-bridge uv run python /absolute/path/to/your/git/slack-mcp/src/slack_mcp/server.py --env SLACK_BOT_TOKEN=xoxb-... --env SLACK_SIGNING_SECRET=... --env SLACK_CHANNEL_ID=C...
+gemini mcp add slack-bridge uv run python /absolute/path/to/your/git/slack-mcp/src/slack_mcp/server.py
 ```
 
 *Note: Replace `/absolute/path/to/your/git/slack-mcp/` with the actual path to your repository.*
 
-After running this command, Gemini CLI will automatically load the `ask_slack` tool and make it available for use in your coding sessions.
+The server will automatically load your `.env` file when it starts, so there is no need to pass credentials as command-line arguments. After running this command, Gemini CLI will automatically load the `ask_slack` tool and make it available for use in your coding sessions.
 
 
 ## Development & Maintenance

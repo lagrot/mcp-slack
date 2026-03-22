@@ -1,6 +1,10 @@
 import os
+from dotenv import load_dotenv
 from mcp.server.fastmcp import FastMCP
 from slack_mcp.slack_client import SlackClient
+
+# Load environment variables from .env file
+load_dotenv()
 
 mcp = FastMCP("Slack-MCP-Server")
 _slack_client = None
