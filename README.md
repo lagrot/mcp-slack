@@ -56,7 +56,14 @@ Initialize the environment and dependencies using **uv**:
 uv sync
 ```
 
+### 3. Running the Server
+Run the MCP server locally:
+```bash
+uv run python src/slack_mcp/server.py
+```
+
 ## Integrating with Gemini CLI
+...
 
 You can easily register the Slack MCP server using the `gemini mcp add` command:
 
