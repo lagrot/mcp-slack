@@ -58,24 +58,15 @@ uv sync
 
 ## Integrating with Gemini CLI
 
-To use the Slack MCP server with Gemini CLI, you need to add it to your configuration file (usually found at `~/.config/gemini-cli/config.yaml`).
+You can easily register the Slack MCP server using the `gemini mcp add` command:
 
-Add the following configuration:
-
-```yaml
-mcp_servers:
-  slack-bridge:
-    command: "uv"
-    args: ["run", "python", "/absolute/path/to/your/git/slack-mcp/src/slack_mcp/server.py"]
-    env:
-      SLACK_BOT_TOKEN: "xoxb-..."
-      SLACK_SIGNING_SECRET: "..."
-      SLACK_CHANNEL_ID: "C..."
+```bash
+gemini mcp add slack-bridge uv run python /absolute/path/to/your/git/slack-mcp/src/slack_mcp/server.py --env SLACK_BOT_TOKEN=xoxb-... --env SLACK_SIGNING_SECRET=... --env SLACK_CHANNEL_ID=C...
 ```
 
-*Note: Replace `/absolute/path/to/your/git/slack-mcp/` with the actual path to your repository on your machine.*
+*Note: Replace `/absolute/path/to/your/git/slack-mcp/` with the actual path to your repository.*
 
-After saving the configuration, Gemini CLI will automatically load the `ask_slack` tool and make it available for use in your coding sessions.
+After running this command, Gemini CLI will automatically load the `ask_slack` tool and make it available for use in your coding sessions.
 
 
 ## Development & Maintenance
