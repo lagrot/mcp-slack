@@ -1,8 +1,8 @@
 import pytest
 from unittest.mock import MagicMock, patch
-from server import ask_slack
+from slack_mcp.server import ask_slack
 
-@patch("server.get_slack_client")
+@patch("slack_mcp.server.get_slack_client")
 def test_ask_slack(mock_get_client):
     # Setup mock client
     mock_instance = MagicMock()

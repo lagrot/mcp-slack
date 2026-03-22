@@ -56,11 +56,12 @@ Initialize the environment and dependencies using **uv**:
 uv sync
 ```
 
-### 3. Running the Server
+## Running the Server
 Run the MCP server directly:
 ```bash
-uv run python server.py
+uv run python src/slack_mcp/server.py
 ```
+
 
 ## Development & Maintenance
 - **Linting/Formatting:** `uv run ruff check . --fix`

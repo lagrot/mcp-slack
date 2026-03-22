@@ -1,6 +1,6 @@
 import os
 from mcp.server.fastmcp import FastMCP
-from slack_client import SlackClient
+from slack_mcp.slack_client import SlackClient
 
 mcp = FastMCP("Slack-MCP-Server")
 _slack_client = None
