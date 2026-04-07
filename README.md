@@ -1,5 +1,7 @@
 # Slack MCP Server
 
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
 A lightweight, maintainable MCP server that bridges coding agent requests to a Slack channel for human-in-the-loop interactions.
 
 ## Why this architecture?
