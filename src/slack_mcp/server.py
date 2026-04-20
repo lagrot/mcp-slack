@@ -6,12 +6,6 @@ from slack_mcp.slack_client import SlackClient
 # Load environment variables from .env file
 load_dotenv()
 
-# Validate required configuration at startup
-REQUIRED_ENV_VARS = ["SLACK_BOT_TOKEN", "SLACK_SIGNING_SECRET", "SLACK_CHANNEL_ID"]
-for var in REQUIRED_ENV_VARS:
-    if not os.environ.get(var):
-        raise EnvironmentError(f"Missing required environment variable: {var}")
-
 mcp = FastMCP("Slack-MCP-Server")
 _slack_client = None
 
@@ -30,11 +24,21 @@ def ask_slack(question: str) -> str:
     channel_id = os.environ.get("SLACK_CHANNEL_ID")
     
     try:
-        get_slack_client().send_message(channel_id, question)
-        return "Message sent to Slack successfully."
-    except Exception:
+        response = get_slack_client().send_message(channel_id, question)
+        if response.get("ok"):
+            return "Message sent to Slack successfully."
+        else:
+            error_msg = response.get("error", "Unknown error")
+            return f"Error: Slack API returned an error: {error_msg}"
+    except Exception as e:
         # Log the specific error internally in a real application
-        return "Error: Failed to send message to Slack. Please check configuration."
+        return f"Error: Failed to send message to Slack. {str(e)}"
 
 if __name__ == "__main__":
+    # Validate required configuration at startup
+    REQUIRED_ENV_VARS = ["SLACK_BOT_TOKEN", "SLACK_SIGNING_SECRET", "SLACK_CHANNEL_ID"]
+    for var in REQUIRED_ENV_VARS:
+        if not os.environ.get(var):
+            raise EnvironmentError(f"Missing required environment variable: {var}")
+
     mcp.run()
